@@ -1,0 +1,29 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "net.tablesouls.ts_ui_lib.mixin",
+  "refmap": "ts_ui_lib.refmap.json",
+  "compatibilityLevel": "JAVA_17",
+  "mixins": [],
+  "client": [
+    "preview.ElytraModelMixin",
+    "preview.LocalPlayerPreviewMixin",
+    "preview.EntityPreviewMixin",
+    "preview.HumanoidModelPreviewMixin",
+    "preview.LivingEntityPosePreviewMixin",
+    "preview.LivingEntityRendererPreviewMixin",
+    "preview.PatchedLivingEntityRendererMixin",
+    "preview.PlayerRendererOffsetMixin",
+    "preview.create.CreateArmPosePreviewMixin",
+    "preview.create.CreateSkyhookPosePreviewMixin",
+    "preview.notenoughanimations.NotEnoughAnimationsPreviewMixin",
+    "preview.paraglider.ParagliderPosePreviewMixin",
+    "preview.parcool.ParcoolAnimationPreviewMixin",
+    "preview.parcool.ParcoolV4AnimationPreviewMixin",
+    "preview.playeranim.PlayerAnimatorPreviewMixin",
+    "preview.mobends.MoBendsPreviewMixin"
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}

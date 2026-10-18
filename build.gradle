@@ -1,0 +1,99 @@
+plugins {
+    id 'eclipse'
+    id 'idea'
+    id 'maven-publish'
+    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
+    id 'org.spongepowered.mixin' version '0.7.+'
+    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+}
+
+group = 'net.tablesouls'
+version = ts_ui_lib_version
+
+base {
+    archivesName = 'ts_ui_lib-forge'
+}
+
+java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+
+minecraft {
+    mappings channel: mapping_channel, version: mapping_version
+    copyIdeResources = true
+}
+
+mixin {
+    add sourceSets.main, 'ts_ui_lib.refmap.json'
+    config 'ts_ui_lib.mixins.json'
+}
+
+repositories {
+    maven {
+        url = "https://api.modrinth.com/maven"
+    }
+    maven {
+        url "https://cursemaven.com"
+    }
+}
+
+dependencies {
+    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
+    compileOnly fg.deobf("maven.modrinth:epic-fight:${epicfight_forge_version}")
+    compileOnly fg.deobf("curse.maven:paragliders-289240:${paraglider_forge_version}")
+}
+
+tasks.named('processResources', ProcessResources).configure {
+    var replaceProperties = [
+            minecraft_version_range: minecraft_version_range,
+            forge_version_range    : forge_version_range,
+            loader_version_range   : loader_version_range,
+            lib_version            : ts_ui_lib_version,
+            mod_license            : mod_license,
+            mod_authors            : mod_authors
+    ]
+    inputs.properties replaceProperties
+
+    filesMatching(['META-INF/mods.toml']) {
+        expand replaceProperties
+    }
+}
+
+tasks.named('jar', Jar).configure {
+    manifest {
+        attributes([
+                'Specification-Title'   : 'ts_ui_lib',
+                'Specification-Vendor'  : mod_authors,
+                'Specification-Version' : '1',
+                'Implementation-Title'  : project.name,
+                'Implementation-Version': project.jar.archiveVersion,
+                'Implementation-Vendor' : mod_authors,
+                // Tells Forge to load the lib's mixins when it is embedded via jarJar
+                'MixinConfigs'          : 'ts_ui_lib.mixins.json'
+        ])
+    }
+}
+
+tasks.withType(PublishToMavenRepository).configureEach {
+    dependsOn 'reobfJar'
+}
+
+publishing {
+    publications {
+        register('mavenJava', MavenPublication) {
+            groupId = 'net.tablesouls'
+            artifactId = 'ts_ui_lib'
+            artifact jar
+        }
+    }
+    repositories {
+        maven {
+            name = 'localRepo'
+            url = "file://${projectDir}/../mcmodsrepo"
+        }
+    }
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.encoding = 'UTF-8'
+}
