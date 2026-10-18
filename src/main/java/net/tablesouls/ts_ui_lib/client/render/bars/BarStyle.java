@@ -1,4 +1,4 @@
-package net.tablesouls.ts_ui_lib.client.render.bars;
+package net.tablesouls.ts_ui_lib.client.render;
 
 public record BarStyle(
         int barColor,

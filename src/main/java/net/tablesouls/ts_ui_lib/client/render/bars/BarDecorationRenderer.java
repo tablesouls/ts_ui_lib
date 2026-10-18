@@ -1,4 +1,4 @@
-package net.tablesouls.ts_ui_lib.client.render.bars;
+package net.tablesouls.ts_ui_lib.client.render;
 
 import net.minecraft.client.gui.GuiGraphics;
 import net.minecraft.resources.ResourceLocation;
