@@ -1,4 +1,4 @@
-package net.tablesouls.ts_ui_lib.client.render;
+package net.tablesouls.ts_ui_lib.client.render.bars;
 
 import com.mojang.blaze3d.systems.RenderSystem;
 import net.minecraft.client.gui.GuiGraphics;

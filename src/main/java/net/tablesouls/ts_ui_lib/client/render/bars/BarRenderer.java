@@ -1,4 +1,4 @@
-package net.tablesouls.ts_ui_lib.client.render;
+package net.tablesouls.ts_ui_lib.client.render.bars;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.Font;
