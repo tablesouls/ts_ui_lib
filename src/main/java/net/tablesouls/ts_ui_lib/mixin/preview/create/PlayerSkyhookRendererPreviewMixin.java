@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Pseudo
 @Mixin(targets = "com.simibubi.create.foundation.render.PlayerSkyhookRenderer", remap = false)
-public abstract class CreateSkyhookPosePreviewMixin {
+public abstract class PlayerSkyhookRendererPreviewMixin {
 
     @Inject(method = "beforeSetupAnim", at = @At("HEAD"), cancellable = true, remap = false)
     private static void souls_combat_hud$resetInsteadOfHang(Player player, HumanoidModel<?> model, CallbackInfo ci) {

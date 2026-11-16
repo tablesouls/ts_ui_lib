@@ -1,6 +1,5 @@
 package net.tablesouls.ts_ui_lib.mixin.preview.parcool;
 
-import net.minecraft.world.entity.player.Player;
 import net.tablesouls.ts_ui_lib.client.preview.PlayerModelPreviewRenderer;
 import org.spongepowered.asm.mixin.Mixin;
 import org.spongepowered.asm.mixin.Pseudo;
@@ -9,12 +8,12 @@ import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Pseudo
-@Mixin(targets = "com.alrex.parcool.common.capability.Animation", remap = false)
-public abstract class ParcoolAnimationPreviewMixin {
+@Mixin(targets = "com.alrex.parcool.client.animation.system.PlayerAnimator", remap = false)
+public abstract class AnimationV4PreviewMixin {
 
-    @Inject(method = "get", at = @At("HEAD"), cancellable = true, remap = false)
-    private static void souls_combat_hud$suppressForPreview(Player player, CallbackInfoReturnable<Object> cir) {
-        if (PlayerModelPreviewRenderer.isPreviewTarget(player)) {
+    @Inject(method = "getCurrentTransformation", at = @At("HEAD"), cancellable = true, remap = false)
+    private void souls_combat_hud$suppressForPreview(CallbackInfoReturnable<Object> cir) {
+        if (PlayerModelPreviewRenderer.isRenderingPreview()) {
             cir.setReturnValue(null);
         }
     }

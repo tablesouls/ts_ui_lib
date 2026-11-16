@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 
 @Pseudo
 @Mixin(targets = "dev.tr7zw.notenoughanimations.logic.PlayerTransformer", remap = false)
-public abstract class NotEnoughAnimationsPreviewMixin {
+public abstract class PlayerTransformerPreviewMixin {
 
     @Inject(method = "updateModel", at = @At("HEAD"), cancellable = true, remap = false)
     private void souls_combat_hud$suppressUpdateModelInPreview(

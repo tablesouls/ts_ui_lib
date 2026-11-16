@@ -9,7 +9,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Pseudo
 @Mixin(targets = "dev.kosmx.playerAnim.core.impl.AnimationProcessor", remap = false)
-public abstract class PlayerAnimatorPreviewMixin {
+public abstract class AnimationProcessorPreviewMixin {
     @Inject(method = "isActive", at = @At("HEAD"), cancellable = true, remap = false)
     private void souls_combat_hud$supress(CallbackInfoReturnable<Boolean> cir) {
         if (PlayerModelPreviewRenderer.isRenderingPreview()) {

@@ -16,7 +16,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
         "com.simibubi.create.content.equipment.zapper.ZapperItem",
         "com.simibubi.create.content.equipment.potatoCannon.PotatoCannonItem"
 }, remap = false)
-public abstract class CreateArmPosePreviewMixin {
+public abstract class EquipmentItemPreviewMixin {
 
     @Inject(method = "getArmPose", at = @At("HEAD"), cancellable = true, remap = false)
     private void souls_combat_hud$noCustomArmPoseInPreview(

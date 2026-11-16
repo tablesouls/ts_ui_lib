@@ -10,7 +10,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 
 @Pseudo
 @Mixin(targets = "goblinbob.mobends.forge.compat.ModCompatManager", remap = false)
-public abstract class MoBendsPreviewMixin {
+public abstract class ModCompatManagerPreviewMixin {
 
     @Inject(method = "shouldDeferAnimation", at = @At("HEAD"),
             cancellable = true, remap = false, require = 0)

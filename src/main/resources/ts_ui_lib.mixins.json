@@ -14,14 +14,16 @@
     "preview.LivingEntityRendererPreviewMixin",
     "preview.PatchedLivingEntityRendererMixin",
     "preview.PlayerRendererOffsetMixin",
-    "preview.create.CreateArmPosePreviewMixin",
-    "preview.create.CreateSkyhookPosePreviewMixin",
-    "preview.notenoughanimations.NotEnoughAnimationsPreviewMixin",
-    "preview.paraglider.ParagliderPosePreviewMixin",
-    "preview.parcool.ParcoolAnimationPreviewMixin",
-    "preview.parcool.ParcoolV4AnimationPreviewMixin",
-    "preview.playeranim.PlayerAnimatorPreviewMixin",
-    "preview.mobends.MoBendsPreviewMixin"
+    "preview.create.EquipmentItemPreviewMixin",
+    "preview.create.PlayerSkyhookRendererPreviewMixin",
+    "preview.notenoughanimations.PlayerTransformerPreviewMixin",
+    "preview.paraglider.ParagliderItemPreviewMixin",
+    "preview.parcool.AnimationPreviewMixin",
+    "preview.parcool.AnimationV4PreviewMixin",
+    "preview.playeranim.AnimationProcessorPreviewMixin",
+    "preview.mobends.ModCompatManagerPreviewMixin",
+    "preview.emfcompat.EMFCompatAnimationHookMixin",
+    "preview.touchnmotion.DrawnEntitiesMixin"
   ],
   "injectors": {
     "defaultRequire": 1
