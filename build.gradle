@@ -1,29 +1,73 @@
 plugins {
-    id 'eclipse'
-    id 'idea'
+    id 'java-library'
     id 'maven-publish'
-    id 'net.minecraftforge.gradle' version '[6.0,6.2)'
-    id 'org.spongepowered.mixin' version '0.7.+'
-    id 'org.parchmentmc.librarian.forgegradle' version '1.+'
+    id 'net.neoforged.moddev' version '2.0.141'
+    id 'idea'
 }
 
-group = 'net.tablesouls'
-version = ts_ui_lib_version
+tasks.named('wrapper', Wrapper).configure {
+    distributionType = Wrapper.DistributionType.BIN
+}
+
+version = mod_version
+group = mod_group_id
+
+sourceSets.main.resources {
+    srcDir('src/generated/resources')
+    exclude("**/*.bbmodel")
+    exclude("src/generated/**/.cache")
+}
 
 base {
-    archivesName = 'ts_ui_lib-forge'
+    archivesName = "${mod_id}-neoforge"
 }
 
-java.toolchain.languageVersion = JavaLanguageVersion.of(17)
+java.toolchain.languageVersion = JavaLanguageVersion.of(21)
 
-minecraft {
-    mappings channel: mapping_channel, version: mapping_version
-    copyIdeResources = true
+neoForge {
+    version = project.neo_version
+
+    parchment {
+        mappingsVersion = project.parchment_mappings_version
+        minecraftVersion = project.parchment_minecraft_version
+    }
+
+    runs {
+        client {
+            client()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        server {
+            server()
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        gameTestServer {
+            type = "gameTestServer"
+            systemProperty 'neoforge.enabledGameTestNamespaces', project.mod_id
+        }
+
+        data {
+            data()
+            programArguments.addAll '--mod', project.mod_id, '--all', '--output', file('src/generated/resources/').getAbsolutePath(), '--existing', file('src/main/resources/').getAbsolutePath()
+        }
+
+        configureEach {
+            systemProperty 'forge.logging.markers', 'REGISTRIES'
+            logLevel = org.slf4j.event.Level.DEBUG
+        }
+    }
+
+    mods {
+        "${mod_id}" {
+            sourceSet(sourceSets.main)
+        }
+    }
 }
 
-mixin {
-    add sourceSets.main, 'ts_ui_lib.refmap.json'
-    config 'ts_ui_lib.mixins.json'
+configurations {
+    runtimeClasspath.extendsFrom localRuntime
 }
 
 repositories {
@@ -36,66 +80,61 @@ repositories {
 }
 
 dependencies {
-    minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
-    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
-
-    compileOnly fg.deobf("maven.modrinth:epic-fight:${epicfight_forge_version}")
-    compileOnly fg.deobf("curse.maven:paragliders-289240:${paraglider_forge_version}")
-    compileOnly fg.deobf("curse.maven:emf-compat-core-1605113:${emf_compat_forge_version}")
-    compileOnly fg.deobf("curse.maven:touch-and-motion-1734204:${touchnmotion_forge_version}")
+    compileOnly "curse.maven:epic-fight-mod-405076:${epicfight_neoforge_version}"
+    compileOnly "curse.maven:paragliders-289240:${paraglider_neoforge_version}"
+    compileOnly "curse.maven:emf-compat-core-1605113:${emf_compat_neoforge_version}"
+    compileOnly "curse.maven:touch-and-motion-1734204:${touchnmotion_neoforge_version}"
 }
 
-tasks.named('processResources', ProcessResources).configure {
+var generateModMetadata = tasks.register("generateModMetadata", ProcessResources) {
     var replaceProperties = [
+            minecraft_version      : minecraft_version,
             minecraft_version_range: minecraft_version_range,
-            forge_version_range    : forge_version_range,
+            neo_version            : neo_version,
             loader_version_range   : loader_version_range,
-            lib_version            : ts_ui_lib_version,
+            mod_id                 : mod_id,
+            mod_name               : mod_name,
+            mod_authors            : mod_authors,
+            mod_description        : mod_description,
             mod_license            : mod_license,
-            mod_authors            : mod_authors
+            mod_version            : mod_version
     ]
     inputs.properties replaceProperties
-
-    filesMatching(['META-INF/mods.toml']) {
-        expand replaceProperties
-    }
+    expand replaceProperties
+    from "src/main/templates"
+    into "build/generated/sources/modMetadata"
 }
+sourceSets.main.resources.srcDir generateModMetadata
+neoForge.ideSyncTask generateModMetadata
 
 tasks.named('jar', Jar).configure {
     manifest {
         attributes([
-                'Specification-Title'   : 'ts_ui_lib',
-                'Specification-Vendor'  : mod_authors,
-                'Specification-Version' : '1',
-                'Implementation-Title'  : project.name,
-                'Implementation-Version': project.jar.archiveVersion,
-                'Implementation-Vendor' : mod_authors,
-                // Tells Forge to load the lib's mixins when it is embedded via jarJar
-                'MixinConfigs'          : 'ts_ui_lib.mixins.json'
+                "MixinConfigs": "${mod_id}.mixins.json"
         ])
     }
-}
-
-tasks.withType(PublishToMavenRepository).configureEach {
-    dependsOn 'reobfJar'
 }
 
 publishing {
     publications {
         register('mavenJava', MavenPublication) {
-            groupId = 'net.tablesouls'
-            artifactId = 'ts_ui_lib'
-            artifact jar
+            from components.java
         }
     }
     repositories {
         maven {
-            name = 'localRepo'
-            url = "file://${projectDir}/../mcmodsrepo"
+            url "file://${project.projectDir}/repo"
         }
     }
 }
 
 tasks.withType(JavaCompile).configureEach {
     options.encoding = 'UTF-8'
+}
+
+idea {
+    module {
+        downloadSources = true
+        downloadJavadoc = true
+    }
 }

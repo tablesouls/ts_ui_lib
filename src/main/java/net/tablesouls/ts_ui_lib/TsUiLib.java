@@ -1,6 +1,6 @@
 package net.tablesouls.ts_ui_lib;
 
-import net.minecraftforge.fml.common.Mod;
+import net.neoforged.fml.common.Mod;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

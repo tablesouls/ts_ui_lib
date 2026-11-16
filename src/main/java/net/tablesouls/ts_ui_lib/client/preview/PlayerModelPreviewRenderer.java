@@ -58,7 +58,7 @@ public final class PlayerModelPreviewRenderer {
             int scissorSize,
             int modelX,
             int modelY,
-            int modelSize,
+            float modelSize,
             float rotationDegrees
     ) {
         UUID uuid = player.getUUID();
@@ -70,8 +70,8 @@ public final class PlayerModelPreviewRenderer {
         PoseStack poseStack = graphics.pose();
         PoseStack.Pose poseMarker = poseStack.last();
 
-        int anchorX = modelX + modelSize / 2;
-        int anchorY = modelY + (int) (modelSize * 1.6f);
+        float anchorX = modelX + modelSize / 2;
+        float anchorY = modelY + (int) (modelSize * 1.6f);
 
         int modelScale = (int) (modelSize * 0.9f);
 
@@ -119,6 +119,7 @@ public final class PlayerModelPreviewRenderer {
                     graphics,
                     anchorX, anchorY,
                     modelScale,
+                    new Vector3f(0.0f, 0.0f, 0.0f),
                     entityRotation,
                     null,
                     player

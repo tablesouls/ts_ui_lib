@@ -1,15 +1,26 @@
-# Gradle
-.gradle/
-build/
-# Forge dev run folders
-run/
-run-data/
-# Local publish repo
-mcmodsrepo/
-# IDE
-.idea/
+# eclipse
+bin
+*.launch
+.settings
+.metadata
+.classpath
+.project
+
+# idea
+out
+*.ipr
+*.iws
 *.iml
-.vscode/
-eclipse/
-bin/
-out/
+.idea
+
+# gradle
+build
+.gradle
+
+# other
+eclipse
+run
+
+# Files from Forge MDK
+forge*changelog.txt
+/src.zip

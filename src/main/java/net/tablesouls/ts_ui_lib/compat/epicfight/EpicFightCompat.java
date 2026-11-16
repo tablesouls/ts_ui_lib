@@ -1,6 +1,6 @@
 package net.tablesouls.ts_ui_lib.compat.epicfight;
 
-import net.minecraftforge.fml.ModList;
+import net.neoforged.fml.ModList;
 
 public class EpicFightCompat {
     public static final String MODID = "epicfight";
