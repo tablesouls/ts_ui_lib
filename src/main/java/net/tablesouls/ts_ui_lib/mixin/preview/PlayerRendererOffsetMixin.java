@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(PlayerRenderer.class)
 public abstract class PlayerRendererOffsetMixin {
     @Inject(method = "getRenderOffset", at = @At("RETURN"), cancellable = true)
-    private void souls_combat_hud$freezeRenderOffset(
+    private void ts_ui_lib$freezeRenderOffset(
             AbstractClientPlayer entity, float partialTicks, CallbackInfoReturnable<Vec3> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget(entity)) {
             cir.setReturnValue(Vec3.ZERO);

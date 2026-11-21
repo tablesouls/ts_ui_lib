@@ -13,14 +13,14 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntityRenderer.class)
 public abstract class LivingEntityRendererPreviewMixin<T extends LivingEntity, M extends EntityModel<T>> {
     @Inject(method = "shouldShowName", at = @At("HEAD"), cancellable = true)
-    private void souls_combat_hud$hideNameTagInPreview(T entity, CallbackInfoReturnable<Boolean> cir) {
+    private void ts_ui_lib$hideNameTagInPreview(T entity, CallbackInfoReturnable<Boolean> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget(entity)) {
             cir.setReturnValue(false);
         }
     }
 
     @Inject(method = "getOverlayCoords", at = @At("HEAD"), cancellable = true)
-    private static void souls_combat_hud$hideDamageTintInPreview(
+    private static void ts_ui_lib$hideDamageTintInPreview(
             LivingEntity entity, float whiteOverlayProgress, CallbackInfoReturnable<Integer> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget(entity)) {
             cir.setReturnValue(OverlayTexture.NO_OVERLAY);

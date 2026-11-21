@@ -11,7 +11,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LocalPlayer.class)
 public abstract class LocalPlayerPreviewMixin {
     @Inject(method = "isCrouching", at = @At("RETURN"), cancellable = true)
-    private void souls_combat_hud$freezeCrouching(CallbackInfoReturnable<Boolean> cir) {
+    private void ts_ui_lib$freezeCrouching(CallbackInfoReturnable<Boolean> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget((Entity) (Object) this)) {
             cir.setReturnValue(false);
         }

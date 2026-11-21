@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PlayerSkyhookRendererPreviewMixin {
 
     @Inject(method = "beforeSetupAnim", at = @At("HEAD"), cancellable = true, remap = false)
-    private static void souls_combat_hud$resetInsteadOfHang(Player player, HumanoidModel<?> model, CallbackInfo ci) {
+    private static void ts_ui_lib$resetInsteadOfHang(Player player, HumanoidModel<?> model, CallbackInfo ci) {
         if (PlayerModelPreviewRenderer.isPreviewTarget(player)) {
             model.head.resetPose();
             model.hat.resetPose();
@@ -28,7 +28,7 @@ public abstract class PlayerSkyhookRendererPreviewMixin {
     }
 
     @Inject(method = "afterSetupAnim", at = @At("HEAD"), cancellable = true, remap = false)
-    private static void souls_combat_hud$skipHangingPose(Player player, HumanoidModel<?> model, CallbackInfo ci) {
+    private static void ts_ui_lib$skipHangingPose(Player player, HumanoidModel<?> model, CallbackInfo ci) {
         if (PlayerModelPreviewRenderer.isPreviewTarget(player)) {
             ci.cancel();
         }

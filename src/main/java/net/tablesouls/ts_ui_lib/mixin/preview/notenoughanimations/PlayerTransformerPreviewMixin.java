@@ -14,7 +14,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 public abstract class PlayerTransformerPreviewMixin {
 
     @Inject(method = "updateModel", at = @At("HEAD"), cancellable = true, remap = false)
-    private void souls_combat_hud$suppressUpdateModelInPreview(
+    private void ts_ui_lib$suppressUpdateModelInPreview(
             AbstractClientPlayer entity, PlayerModel model, float swing, CallbackInfo info, CallbackInfo ci) {
         if (PlayerModelPreviewRenderer.isPreviewTarget(entity)) {
             ci.cancel();
@@ -22,7 +22,7 @@ public abstract class PlayerTransformerPreviewMixin {
     }
 
     @Inject(method = "preUpdate", at = @At("HEAD"), cancellable = true, remap = false)
-    private void souls_combat_hud$suppressPreUpdateInPreview(
+    private void ts_ui_lib$suppressPreUpdateInPreview(
             AbstractClientPlayer entity, PlayerModel model, float swing, CallbackInfo info, CallbackInfo ci) {
         if (PlayerModelPreviewRenderer.isPreviewTarget(entity)) {
             ci.cancel();

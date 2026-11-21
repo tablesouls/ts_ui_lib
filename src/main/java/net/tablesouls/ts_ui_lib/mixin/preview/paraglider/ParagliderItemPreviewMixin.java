@@ -7,13 +7,14 @@ import org.spongepowered.asm.mixin.Pseudo;
 import org.spongepowered.asm.mixin.injection.At;
 import org.spongepowered.asm.mixin.injection.Inject;
 import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
-import tictim.paraglider.contents.item.ParagliderItem;
+import tictim.paraglider.impl.DefaultParagliderItemCapability;
 
 @Pseudo
-@Mixin(value = ParagliderItem.class, remap = false)
+@Mixin(value = DefaultParagliderItemCapability.class, remap = false)
 public abstract class ParagliderItemPreviewMixin {
-    @Inject(method = "isParagliding", at = @At("HEAD"), cancellable = true, remap = false)
-    private void souls_combat_hud$suppressParaglidingPoseInPreview(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+    @Inject(method = "isParagliding(Lnet/minecraft/world/item/ItemStack;)Z",
+            at = @At("HEAD"), cancellable = true, remap = false, require = 0)
+    private void ts_ui_lib$suppressParaglidingPoseInPreview(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (PlayerModelPreviewRenderer.isPreviewHeldItem(stack)) {
             cir.setReturnValue(false);
         }
