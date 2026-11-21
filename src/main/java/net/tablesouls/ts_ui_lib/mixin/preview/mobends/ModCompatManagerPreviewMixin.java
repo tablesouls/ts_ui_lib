@@ -14,7 +14,7 @@ public abstract class ModCompatManagerPreviewMixin {
 
     @Inject(method = "shouldDeferAnimation", at = @At("HEAD"),
             cancellable = true, remap = false, require = 0)
-    private static void souls$deferForPreview(LivingEntity entity,
+    private static void ts_ui_lib$deferForPreview(LivingEntity entity,
                                               CallbackInfoReturnable<Boolean> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget(entity)) {
             cir.setReturnValue(true);

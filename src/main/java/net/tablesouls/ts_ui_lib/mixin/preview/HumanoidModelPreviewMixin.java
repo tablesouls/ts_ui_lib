@@ -12,17 +12,17 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfo;
 @Mixin(HumanoidModel.class)
 public abstract class HumanoidModelPreviewMixin {
     @ModifyVariable(method = "setupAnim", at = @At("HEAD"), ordinal = 0)
-    private float souls_combat_hud$freezeLimbSwing(float limbSwing, LivingEntity entity) {
+    private float ts_ui_lib$freezeLimbSwing(float limbSwing, LivingEntity entity) {
         return PlayerModelPreviewRenderer.isPreviewTarget(entity) ? 0f : limbSwing;
     }
 
     @ModifyVariable(method = "setupAnim", at = @At("HEAD"), ordinal = 1)
-    private float souls_combat_hud$freezeLimbSwingAmount(float limbSwingAmount, LivingEntity entity) {
+    private float ts_ui_lib$freezeLimbSwingAmount(float limbSwingAmount, LivingEntity entity) {
         return PlayerModelPreviewRenderer.isPreviewTarget(entity) ? 0f : limbSwingAmount;
     }
 
     @Inject(method = "setupAnim", at = @At("HEAD"))
-    private void souls_combat_hud$freezeCrouchField(
+    private void ts_ui_lib$freezeCrouchField(
             LivingEntity entity,
             float limbSwing,
             float limbSwingAmount,

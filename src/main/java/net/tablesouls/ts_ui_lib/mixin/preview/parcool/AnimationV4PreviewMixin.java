@@ -12,7 +12,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class AnimationV4PreviewMixin {
 
     @Inject(method = "getCurrentTransformation", at = @At("HEAD"), cancellable = true, remap = false)
-    private void souls_combat_hud$suppressForPreview(CallbackInfoReturnable<Object> cir) {
+    private void ts_ui_lib$suppressForPreview(CallbackInfoReturnable<Object> cir) {
         if (PlayerModelPreviewRenderer.isRenderingPreview()) {
             cir.setReturnValue(null);
         }

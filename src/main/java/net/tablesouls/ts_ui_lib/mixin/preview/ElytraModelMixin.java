@@ -21,7 +21,7 @@ public abstract class ElytraModelMixin {
             at = @At("RETURN"),
             require = 0
     )
-    private void souls_combat_hud$idleElytraInPreview(
+    private void ts_ui_lib$idleElytraInPreview(
             LivingEntity entity,
             float limbSwing,
             float limbSwingAmount,

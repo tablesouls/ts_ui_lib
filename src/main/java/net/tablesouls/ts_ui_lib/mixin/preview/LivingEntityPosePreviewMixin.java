@@ -12,49 +12,49 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 @Mixin(LivingEntity.class)
 public abstract class LivingEntityPosePreviewMixin {
     @Inject(method = "getSwimAmount", at = @At("RETURN"), cancellable = true)
-    private void souls_combat_hud$freezeSwimAmount(float partialTicks, CallbackInfoReturnable<Float> cir) {
+    private void ts_ui_lib$freezeSwimAmount(float partialTicks, CallbackInfoReturnable<Float> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget((Entity) (Object) this)) {
             cir.setReturnValue(0f);
         }
     }
 
     @Inject(method = "isUsingItem", at = @At("RETURN"), cancellable = true)
-    private void souls_combat_hud$freezeUsingItem(CallbackInfoReturnable<Boolean> cir) {
+    private void ts_ui_lib$freezeUsingItem(CallbackInfoReturnable<Boolean> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget((Entity) (Object) this)) {
             cir.setReturnValue(false);
         }
     }
 
     @Inject(method = "getUseItemRemainingTicks", at = @At("RETURN"), cancellable = true)
-    private void souls_combat_hud$freezeUseItemRemainingTicks(CallbackInfoReturnable<Integer> cir) {
+    private void ts_ui_lib$freezeUseItemRemainingTicks(CallbackInfoReturnable<Integer> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget((Entity) (Object) this)) {
             cir.setReturnValue(0);
         }
     }
 
     @Inject(method = "getUseItem", at = @At("RETURN"), cancellable = true)
-    private void souls_combat_hud$freezeUseItemStack(CallbackInfoReturnable<ItemStack> cir) {
+    private void ts_ui_lib$freezeUseItemStack(CallbackInfoReturnable<ItemStack> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget((Entity) (Object) this)) {
             cir.setReturnValue(ItemStack.EMPTY);
         }
     }
 
     @Inject(method = "isFallFlying", at = @At("RETURN"), cancellable = true)
-    private void souls_combat_hud$freezeFallFlying(CallbackInfoReturnable<Boolean> cir) {
+    private void ts_ui_lib$freezeFallFlying(CallbackInfoReturnable<Boolean> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget((Entity) (Object) this)) {
             cir.setReturnValue(false);
         }
     }
 
     @Inject(method = "getFallFlyingTicks", at = @At("RETURN"), cancellable = true)
-    private void souls_combat_hud$freezeFallFlyingTicks(CallbackInfoReturnable<Integer> cir) {
+    private void ts_ui_lib$freezeFallFlyingTicks(CallbackInfoReturnable<Integer> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget((Entity) (Object) this)) {
             cir.setReturnValue(0);
         }
     }
 
     @Inject(method = "isAutoSpinAttack", at = @At("RETURN"), cancellable = true)
-    private void souls_combat_hud$freezeSpinAttack(CallbackInfoReturnable<Boolean> cir) {
+    private void ts_ui_lib$freezeSpinAttack(CallbackInfoReturnable<Boolean> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget((Entity) (Object) this)) {
             cir.setReturnValue(false);
         }

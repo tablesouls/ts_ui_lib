@@ -19,12 +19,12 @@ public abstract class PatchedLivingEntityRendererMixin {
                     value = "INVOKE",
                     target = "Lnet/minecraft/world/entity/LivingEntity;isCrouching()Z")
     )
-    private boolean souls_combat_hud$suppressCrouchOffset(LivingEntity entity) {
+    private boolean ts_ui_lib$suppressCrouchOffset(LivingEntity entity) {
         return !PlayerModelPreviewRenderer.isPreviewTarget(entity) && entity.isCrouching();
     }
 
     @Inject(method = "getOverlayCoord", at = @At("HEAD"), cancellable = true, remap = false)
-    private void souls_combat_hud$hideDamageTintInPreview(
+    private void ts_ui_lib$hideDamageTintInPreview(
             LivingEntity entity, LivingEntityPatch<?> entityPatch, float partialTick,
             CallbackInfoReturnable<Integer> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget(entity)) {

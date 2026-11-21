@@ -19,7 +19,7 @@ import org.spongepowered.asm.mixin.injection.callback.CallbackInfoReturnable;
 public abstract class EquipmentItemPreviewMixin {
 
     @Inject(method = "getArmPose", at = @At("HEAD"), cancellable = true, remap = false)
-    private void souls_combat_hud$noCustomArmPoseInPreview(
+    private void ts_ui_lib$noCustomArmPoseInPreview(
             ItemStack stack, AbstractClientPlayer player, InteractionHand hand,
             CallbackInfoReturnable<HumanoidModel.ArmPose> cir) {
         if (PlayerModelPreviewRenderer.isPreviewTarget(player)) {

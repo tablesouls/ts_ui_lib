@@ -13,7 +13,7 @@ import tictim.paraglider.contents.item.ParagliderItem;
 @Mixin(value = ParagliderItem.class, remap = false)
 public abstract class ParagliderItemPreviewMixin {
     @Inject(method = "isParagliding", at = @At("HEAD"), cancellable = true, remap = false)
-    private void souls_combat_hud$suppressParaglidingPoseInPreview(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
+    private void ts_ui_lib$suppressParaglidingPoseInPreview(ItemStack stack, CallbackInfoReturnable<Boolean> cir) {
         if (PlayerModelPreviewRenderer.isPreviewHeldItem(stack)) {
             cir.setReturnValue(false);
         }
